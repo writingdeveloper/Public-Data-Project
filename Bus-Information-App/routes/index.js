@@ -14,14 +14,15 @@ request({
   console.log(json);
   const item = json.tableInfo.list.row
   console.table(item)
-  var vehicleno = item.map(i => i.VEHICLENO + '안녕');
-  console.log(vehicleno);
-//   const VEHICLENOS = item.map(i => i.VEHICLENO)
-//   const template = `
-// ul
-//   each VEHICLENO in VEHICLENOS
-//     li= VEHICLENO
-//   `
+  var vehicleno = item.map(i => i.VEHICLENO);
+  var rnum = item.map(i => i.RNUM);
+  var routenm =item.map(i=>i.ROUTENM);
+  //   const VEHICLENOS = item.map(i => i.VEHICLENO)
+  //   const template = `
+  // ul
+  //   each VEHICLENO in VEHICLENOS
+  //     li= VEHICLENO
+  //   `
   // const html = pug.render(template, {
   //   VEHICLENOS: VEHICLENOS
   // })
@@ -31,12 +32,18 @@ request({
   router.get('/', function (req, res, next) {
     res.render('index', {
       title: 'Express',
-      vehicleno: vehicleno
+      vehicleno: vehicleno,
+      howmanybus: item.length,
+      rnum: rnum,
+      routenm: routenm
+      // presentstopnm: presentstopnm,
+      // stopnm: stopnm,
+      // stopid: stopid,
+      // arrivaltime: arrivaltime,
+      // prevstopcnt: prevstopcnt
     });
   });
 });
-
-
 
 
 module.exports = router;
