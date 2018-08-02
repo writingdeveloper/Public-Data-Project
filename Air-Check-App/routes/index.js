@@ -11,6 +11,7 @@ request({
   method: 'GET'
 }, (error, response, xml) => {
   const json = JSON.parse(parser.toJson(xml))
+  console.log(json)
   const item = json.response.body.items.item
   console.table(item)
   const addrs = item.map(i => i.addr)
@@ -22,7 +23,7 @@ ul
   const html = pug.render(template, {
     addrs: addrs
   })
-  console.log(html)
+  // console.log(html)
 
   /* GET home page. */
   router.get('/', function (req, res, next) {
