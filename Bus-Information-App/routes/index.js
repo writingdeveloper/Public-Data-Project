@@ -11,12 +11,18 @@ request({
   method: 'GET'
 }, (error, response, xml) => {
   const json = JSON.parse(parser.toJson(xml))
-  console.log(json);
-  const item = json.tableInfo.list.row
-  console.table(item)
-  var vehicleno = item.map(i => i.VEHICLENO);
-  var rnum = item.map(i => i.RNUM);
-  var routenm =item.map(i=>i.ROUTENM);
+  // console.log(json);
+  // console.log(json.tableInfo.list.row);
+  var item = json.tableInfo.list.row
+  for(key in item){
+    console.log("key : "+key+ " value : "+item[key]);
+  }
+  console.log(item);
+  
+  // console.table(item)
+  // var vehicleno = item.map(i => i.VEHICLENO);
+  // var rnum = item.map(i => i.RNUM);
+  // var routenm =item.map(i=>i.ROUTENM);
   //   const VEHICLENOS = item.map(i => i.VEHICLENO)
   //   const template = `
   // ul
@@ -32,15 +38,7 @@ request({
   router.get('/', function (req, res, next) {
     res.render('index', {
       title: 'Express',
-      vehicleno: vehicleno,
-      howmanybus: item.length,
-      rnum: rnum,
-      routenm: routenm
-      // presentstopnm: presentstopnm,
-      // stopnm: stopnm,
-      // stopid: stopid,
-      // arrivaltime: arrivaltime,
-      // prevstopcnt: prevstopcnt
+      key: item[key]
     });
   });
 });
